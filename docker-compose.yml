@@ -1,0 +1,25 @@
+services:
+  browser:
+    image: lscr.io/linuxserver/chromium:latest
+    container_name: dev-browser
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - CUSTOM_USER=admin
+      - PASSWORD=${BROWSER_PASSWORD}
+      - TITLE=Dev Browser
+      - RESTART_APP=true
+      - CHROME_CLI=--remote-debugging-port=9222 --remote-allow-origins=* --user-data-dir=/config/chrome --no-first-run --no-default-browser-check --disable-dev-shm-usage
+    volumes:
+      - ./data:/config
+    ports:
+      - "6080:3000"
+      - "127.0.0.1:9222:9222"
+    shm_size: "2gb"
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2.0"
+    restart: unless-stopped
