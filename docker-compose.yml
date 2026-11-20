@@ -3,15 +3,15 @@ services:
     image: lscr.io/linuxserver/chromium:latest
     container_name: dev-browser
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-      - CUSTOM_USER=admin
-      - PASSWORD=${NOVNC_PASSWORD}
-      - TITLE=Dev Browser
-      - RESTART_APP=true
-      - >-
-        CHROME_CLI=--remote-debugging-address=0.0.0.0
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Paris
+      CUSTOM_USER: admin
+      PASSWORD: ${NOVNC_PASSWORD}
+      TITLE: Dev Browser
+      RESTART_APP: "true"
+      CHROME_CLI: >-
+        --remote-debugging-address=0.0.0.0
         --remote-debugging-port=9222
         --remote-allow-origins=*
         --user-data-dir=/config/chrome
